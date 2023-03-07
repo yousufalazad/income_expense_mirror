@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>PDF</title>
+    <title>Income Expense Mirror</title>
     <style>
     * {
         margin: 0;
@@ -171,12 +171,10 @@
     <table class="body-wrap">
         <tbody>
             <tr>
-                <td></td>
                 <td class="aligncenter">
                     <h2>Income Expense Statement</h2>
-                    <p>Statement month: March</p>
+                    <p>Month: {{ $selected_month_name->name }}</p>
                 </td>
-                <td></td>
             </tr>
         </tbody>
     </table>
@@ -184,14 +182,14 @@
 
         <tbody>
             <tr>
-                <td></td>
-                <td class="container" width="280">
+                <td class="container" width="250">
                     <div class="content">
                         <table class="invoice">
                             <tbody>
                                 <tr>
                                     <td class="content-block">
                                         <p>INCOME</p>
+                                        <hr>
                                     </td>
                                 </tr>
                                 <tr>
@@ -200,7 +198,9 @@
                                             @if($monthly_incomes->count() > 0)
                                             <thead>
                                                 <tr>
-                                                    <td class="alignleft">Monthly</td>
+                                                    <th class="alignleft">
+                                                        <p>Monthly</p>
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -213,10 +213,66 @@
                                             </tbody>
                                             @endif
 
+                                            @if($quarterly_incomes->count() > 0)
+                                            <thead>
+                                                <tr>
+                                                    <th class="alignleft">
+                                                        <p>Quarterly</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($quarterly_incomes as $quarterly_income)
+                                                <tr>
+                                                    <td class="title">{{ $quarterly_income->title }}</td>
+                                                    <td class="alignright">{{ $quarterly_income->amount }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
+                                            @if($halfyearly_incomes->count() > 0)
+                                            <thead>
+                                                <tr>
+                                                    <th class="alignleft">
+                                                        <p>Half Yearl</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($halfyearly_incomes as $halfyearly_income)
+                                                <tr>
+                                                    <td class="title">{{ $halfyearly_income->title }}</td>
+                                                    <td class="alignright">{{ $halfyearly_income->amount }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
+                                            @if($yearly_incomes->count() > 0)
+                                            <thead>
+                                                <tr>
+                                                    <th class="alignleft">
+                                                        <p>Yearly</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($yearly_incomes as $yearly_income)
+                                                <tr>
+                                                    <td class="title">{{ $yearly_income->title }}</td>
+                                                    <td class="alignright">{{ $yearly_income->amount }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
                                             @if($onetime_incomes->count() > 0)
                                             <thead>
                                                 <tr>
-                                                    <th class="alignleft">One-time</th>
+                                                    <th class="alignleft">
+                                                        <p>One-time</p>
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -231,55 +287,135 @@
 
                                             <tbody>
                                                 <tr class="total">
-                                                    <td class="alignright" width="80%">
-                                                        Total</td>
+                                                    <td class="alignright" width="80%">Total: &nbsp; &nbsp; </td>
                                                     <td class="alignright">{{ $income_total_sum }}</td>
                                                 </tr>
                                             </tbody>
-
                                         </table>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
+                        <table class="invoice">
+                            <tbody>
+                                <tr>
+                                    <td class="content-block">
+                                        <p>Total income: {{ $income_total_sum }}</p>
+                                        <p>Total expense: {{ $expense_total_sum }}</p>
+                                        <p>Balance: {{$balance}}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </td>
                 <td></td>
-                <td class="container" width="280">
+                <td class="container" width="250">
                     <div class="content">
                         <table class="invoice">
                             <tbody>
                                 <tr>
                                     <td class="content-block">
                                         <p>EXPENSE</p>
+                                        <hr>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <table class="invoice-items" cellpadding="0" cellspacing="0">
-
+                                            @if($monthly_expenses->count() > 0)
                                             <thead>
                                                 <tr>
-                                                    <th class="alignleft">Month</th>
+                                                    <th class="alignleft">
+                                                        <p>Monthly</p>
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($monthly_expenses as $monthly_expense)
                                                 <tr>
-                                                    <td class="title">Service 1</td>
-                                                    <td class="alignright">$ 20.00</td>
+                                                    <td class="title">{{ $monthly_expense->title }}</td>
+                                                    <td class="alignright">{{ $monthly_expense->amount }}</td>
                                                 </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
+                                            @if($quarterly_expenses->count() > 0)
+                                            <thead>
                                                 <tr>
-                                                    <td class="title">Service 2</td>
-                                                    <td class="alignright">$ 10.00</td>
+                                                    <th class="alignleft">
+                                                        <p>Quarterly</p>
+                                                    </th>
                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($quarterly_expenses as $quarterly_expense)
                                                 <tr>
-                                                    <td class="title"> Service 3</td>
-                                                    <td class="alignright">$ 6.00</td>
+                                                    <td class="title">{{ $quarterly_expense->title }}</td>
+                                                    <td class="alignright">{{ $quarterly_expense->amount }}</td>
                                                 </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
+                                            @if($halfyearly_expenses->count() > 0)
+                                            <thead>
+                                                <tr>
+                                                    <th class="alignleft">
+                                                        <p>Half Year</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($halfyearly_expenses as $halfyearly_expense)
+                                                <tr>
+                                                    <td class="title">{{ $halfyearly_expense->title }}</td>
+                                                    <td class="alignright">{{ $halfyearly_expense->amount }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
+                                            @if($yearly_expenses->count() > 0)
+                                            <thead>
+                                                <tr>
+                                                    <th class="alignleft">
+                                                        <p>Yearly</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($yearly_expenses as $yearly_expense)
+                                                <tr>
+                                                    <td class="title">{{ $yearly_expense->title }}</td>
+                                                    <td class="alignright">{{ $yearly_expense->amount }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
+                                            @if($onetime_expenses->count() > 0)
+                                            <thead>
+                                                <tr>
+                                                    <th class="alignleft">
+                                                        <p>One-time</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($onetime_expenses as $onetime_expense)
+                                                <tr>
+                                                    <td class="title">{{ $onetime_expense->title }}</td>
+                                                    <td class="alignright">{{ $onetime_expense->amount }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                            @endif
+
+                                            <tbody>
                                                 <tr class="total">
-                                                    <td class="alignright" width="80%">
-                                                        Total</td>
+                                                    <td class="alignright" width="80%">Total: &nbsp; &nbsp; </td>
                                                     <td class="alignright">{{ $expense_total_sum }}</td>
                                                 </tr>
                                             </tbody>
@@ -290,22 +426,19 @@
                         </table>
                     </div>
                 </td>
-                <td></td>
             </tr>
         </tbody>
     </table>
-    <table class="body-wrap">
+    <br>
+    <table width="100%">
         <tbody>
             <tr>
-                <td></td>
-                <td class="aligncenter">
-                    <p>Balance: {{$balance}}</p>
+                <td class="aligncenter content-block">Powerd by: <a
+                        href="https://incomeexpensemirror.com">IncomeExpenseMirror.com</a>
                 </td>
-                <td></td>
             </tr>
         </tbody>
     </table>
 </body>
-
 
 </html>

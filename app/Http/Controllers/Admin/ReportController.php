@@ -28,12 +28,58 @@ class ReportController extends Controller
     public function generatePdf(Request $request)
     {
         $user_id=auth()->user()->id;
-        $selected_month_id = 3;
+        //$selected_month_id = 1;
+        $date = Carbon::now();
+        $selected_month_id = $date->format('F');
+         
+        if($request->user_selected_month_id == !NULL){
+            $selected_month_id= $request->user_selected_month_id;
+        }
+        else{
+            $date = Carbon::now();
+            $selected_month_id = $date->format('F');
 
-        // $date = Carbon::now();
-        // $selected_month_id = $date->format('F');
+            if($selected_month_id == "January"){
+                $selected_month_id = 1;
+            }
+            elseif($selected_month_id == "February"){
+                $selected_month_id = 2;
+            }
+            elseif($selected_month_id == "March"){
+                $selected_month_id = 3;
+            }
+            elseif($selected_month_id == "April"){
+                $selected_month_id = 4;
+            }
+            elseif($selected_month_id == "May"){
+                $selected_month_id = 5;
+            }
+            elseif($selected_month_id == "June"){
+                $selected_month_id = 6;
+            }
+            elseif($selected_month_id == "July"){
+                $selected_month_id = 7;
+            }
+            elseif($selected_month_id == "August"){
+                $selected_month_id = 8;
+            }
+            elseif($selected_month_id == "September"){
+                $selected_month_id = 9;
+            }
+            elseif($selected_month_id == "October"){
+                $selected_month_id = 10;
+            }
+            elseif($selected_month_id == "November"){
+                $selected_month_id = 11;
+            }
+            else{
+                $selected_month_id = 12;       
+            }
+        }
 
-// -----------------------------Start Income Calculation------------------------------------
+
+
+        // -----------------------------Start Income Calculation------------------------------------
          $monthly_incomes = FixedIncomeMonthly::where([["user_id", "=", $user_id]])
          ->orderBy('date')
          ->get();
@@ -80,14 +126,13 @@ class ReportController extends Controller
         ->get();
 
         $expense_total_sum = $onetime_expenses->sum('amount') + $monthly_expenses->sum('amount') + $quarterly_expenses->sum('amount') + $halfyearly_expenses->sum('amount')+ $yearly_expenses->sum('amount') + $onetime_expenses->sum('amount');
-        //-----------------------------Start Expense Calculation----------------------------------
+        //-----------------------------End Expense Calculation----------------------------------
 
         $balance = $income_total_sum - $expense_total_sum;
     
-        $starting_months = Month::all();
+        //$starting_months = Month::all();
         $selected_month_name = Month::find($selected_month_id);
-        // return view('admin.report.index', compact('starting_months', 'selected_month_name', 'monthly_incomes', 'quarterly_incomes', 'halfyearly_incomes', 'yearly_incomes', 'onetime_incomes', 'income_total_sum',
-        // 'monthly_expenses', 'quarterly_expenses', 'halfyearly_expenses', 'yearly_expenses', 'onetime_expenses', 'expense_total_sum', 'balance'));
+        
 
         $html = View::make('pdf.report', compact('selected_month_name', 'monthly_incomes', 'quarterly_incomes', 'halfyearly_incomes', 'yearly_incomes', 'onetime_incomes', 'income_total_sum',
          'monthly_expenses', 'quarterly_expenses', 'halfyearly_expenses', 'yearly_expenses', 'onetime_expenses', 'expense_total_sum', 'balance'))->render();
@@ -167,7 +212,7 @@ class ReportController extends Controller
         // $date = Carbon::now();
         // $selected_month_id = $date->format('F');
 
-// -----------------------------Start Income Calculation------------------------------------
+        // -----------------------------Start Income Calculation------------------------------------
         $monthly_incomes = FixedIncomeMonthly::where([["user_id", "=", $user_id]])
         ->orderBy('date')
         ->get();

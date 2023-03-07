@@ -4364,5 +4364,6 @@ img.float-right {
 }
 
 .total-expense-right{
-    margin-right: 300px;
+    /* margin-right: 300px; */
+    text-align: right;
 }

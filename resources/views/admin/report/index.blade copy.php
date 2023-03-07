@@ -8,13 +8,13 @@
             <div>
                 <form action="" method="get">
                     @csrf
-                    <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="1"
+                    <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="3"
                         name="user_selected_month_id"> {{ __('January') }}</button>
 
                     <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="2"
                         name="user_selected_month_id"> {{ __('February') }}</button>
 
-                    <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="3"
+                    <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="1"
                         name="user_selected_month_id"> {{ __('March') }}</button>
 
                     <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="4"
@@ -43,7 +43,6 @@
 
                     <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="12"
                         name="user_selected_month_id"> {{ __('December') }}</button>
-                        
                     <a type="button" class="btn btn-primary btn-block px-4 my-3" href="{{ route('generatePdf') }}">
                         {{ __('PDF') }}</a>
                 </form>
@@ -149,7 +148,7 @@
                     </div>
                     @endforeach
                     @endif
-                    <h5 class='amount-align'>Total: &nbsp; &nbsp; {{ $income_total_sum }}</h5>
+
                 </div>
                 <div class="col-md-6 ps-5">
 
@@ -225,42 +224,25 @@
                     </div>
                     @endforeach
                     @endif
-                    <h5 class="amount-align">Total: &nbsp; &nbsp; {{ $expense_total_sum }}</h5>
                 </div>
             </div>
-            <br>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class='py-3 pe-4 total-expense-right'>Total: &nbsp; &nbsp; {{ $income_total_sum }}</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class='py-3 total-expense-right'>Total: &nbsp; &nbsp; {{ $expense_total_sum }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <br>
             <br>
 
             <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5>Total income:&nbsp; &nbsp;</h5>
-                                <h5>Total expense:&nbsp; &nbsp;</h5>
-
-                                @if($balance >= 0)
-                                <h5>Your savings:&nbsp; &nbsp;</h5>
-                                @else
-                                <h5>Your deficit:&nbsp; &nbsp;</h5>
-                                @endif
-
-                            </div>
-                            <div class="col-md-1">
-                                <h5>{{ $income_total_sum }}</h5>
-                                <h5>{{ $expense_total_sum }}</h5>
-                                <h5>{{ $balance }}</h5>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7"></div>
-                </div>
-            </div>
-
-
-            <!-- <div class="row">
                 <div class="col-md-12">
                     <h5>Total income: &nbsp; &nbsp; {{ $income_total_sum }}</h5>
                     <h5>Total expense: &nbsp; &nbsp; {{ $expense_total_sum }}</h5>
@@ -270,18 +252,7 @@
                     <h5>Your deficit:&nbsp; &nbsp; {{$balance}}</h5>
                     @endif
                 </div>
-            </div> -->
-            <br>
-            <hr>
-            <br>
-            <table width="100%">
-                <tbody>
-                    <tr>
-                        <td class="aligncenter content-block">Powerd by: <a
-                                href="https://incomeexpensemirror.com">www.incomeexpensemirror.com</a></td>
-                    </tr>
-                </tbody>
-            </table>
+            </div>
         </div>
     </div>
 </div>
