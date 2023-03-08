@@ -50,27 +50,6 @@
                 <br>
             </div>
 
-            <!-- <div class="card-body">
-                <form action="" method="get">
-                    @csrf
-                    <div class="row py-3">
-                        <div class="col">
-                            <select class="form-control mt-3" id="user_selected_month_id" name="user_selected_month_id"
-                                required>
-                                <option value="">Select Report Month</option>
-                                @foreach ($starting_months as $starting_month)
-                                <option value="{{ $starting_month->id }}">{{ $starting_month->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col">
-                            <button type="submit"
-                                class="btn btn-primary btn-block px-4 my-3">{{ __('Search') }}</button>
-                        </div>
-                    </div>
-                </form>
-            </div> -->
-
             <div class="row">
                 <div class="col-md-12 py-3">
                     <h4>Statement month: {{$selected_month_name->name}}</h4>
@@ -258,19 +237,6 @@
                     <div class="col-md-7"></div>
                 </div>
             </div>
-
-
-            <!-- <div class="row">
-                <div class="col-md-12">
-                    <h5>Total income: &nbsp; &nbsp; {{ $income_total_sum }}</h5>
-                    <h5>Total expense: &nbsp; &nbsp; {{ $expense_total_sum }}</h5>
-                    @if($balance >= 0)
-                    <h5>Your savings:&nbsp; &nbsp; {{$balance}}</h5>
-                    @else
-                    <h5>Your deficit:&nbsp; &nbsp; {{$balance}}</h5>
-                    @endif
-                </div>
-            </div> -->
             <br>
             <hr>
             <br>

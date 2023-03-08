@@ -130,7 +130,7 @@ class ReportController extends Controller
 
         $balance = $income_total_sum - $expense_total_sum;
     
-        //$starting_months = Month::all();
+        $starting_months = Month::all();
         $selected_month_name = Month::find($selected_month_id);
         
 
