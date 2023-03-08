@@ -52,7 +52,7 @@
 
             <div class="row">
                 <div class="col-md-12 py-3">
-                    <h4>Statement month: {{$selected_month_name->name}}</h4>
+                    <h4>Statement month: {{$selected_month_name}}</h4>
                 </div>
                 <div class="col-md-6 pe-5">
                     <h5>INCOME</h5>
