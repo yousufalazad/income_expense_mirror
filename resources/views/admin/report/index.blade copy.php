@@ -43,39 +43,25 @@
 
                     <button type="submit" class="btn btn-primary btn-block px-4 my-3" value="12"
                         name="user_selected_month_id"> {{ __('December') }}</button>
-                        
-                    <a type="button" class="btn btn-primary btn-block px-4 my-3" href="{{ route('generatePdf') }}">
-                        {{ __('PDF') }}</a>
+
+                    <!-- <a type="button" class="btn btn-primary btn-block px-4 my-3" href="{{ route('generatePdf', $selected_month_name->id) }}">
+                        {{ __('PDF') }}</a> -->
                 </form>
                 <br>
             </div>
-
-            <!-- <div class="card-body">
-                <form action="" method="get">
-                    @csrf
-                    <div class="row py-3">
-                        <div class="col">
-                            <select class="form-control mt-3" id="user_selected_month_id" name="user_selected_month_id"
-                                required>
-                                <option value="">Select Report Month</option>
-                                @foreach ($starting_months as $starting_month)
-                                <option value="{{ $starting_month->id }}">{{ $starting_month->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col">
-                            <button type="submit"
-                                class="btn btn-primary btn-block px-4 my-3">{{ __('Search') }}</button>
-                        </div>
-                    </div>
-                </form>
-            </div> -->
-
+        
             <div class="row">
-                <div class="col-md-12 py-3">
-                    <h4>Statement month: {{$selected_month_name->name}}</h4>
+                <div class="col-md-12 d-flex justify-content-between py-3">
+                    <div>
+                        <h4>Statement month: {{$selected_month_name->name}}</h4>
+                    </div>
+                    <div>
+                        <a type="button" class="btn btn-info btn-block px-5"
+                            href="{{ route('generatePdf', $selected_month_name->id) }}">
+                            {{ __('Download PDF') }}</a>
+                    </div>
                 </div>
-                <div class="col-md-6 pe-5">
+                <div class="col-md-4 pe-5">
                     <h5>INCOME</h5>
                     <hr>
 
@@ -149,9 +135,11 @@
                     </div>
                     @endforeach
                     @endif
+                    <hr>
                     <h5 class='amount-align'>Total: &nbsp; &nbsp; {{ $income_total_sum }}</h5>
+                    <hr>
                 </div>
-                <div class="col-md-6 ps-5">
+                <div class="col-md-4 ps-5">
 
                     <h5>EXPENSES</h5>
                     <hr>
@@ -225,7 +213,9 @@
                     </div>
                     @endforeach
                     @endif
+                    <hr>
                     <h5 class="amount-align">Total: &nbsp; &nbsp; {{ $expense_total_sum }}</h5>
+                    <hr>
                 </div>
             </div>
             <br>

@@ -25,12 +25,60 @@ use Illuminate\Support\Facades\View;
 
 class ReportController extends Controller
 {
-    public function generatePdf($id)
+    public function generatePdf(Request $request)
     {
         $user_id=auth()->user()->id;
-        $selected_month_id= $id;
-        // $selected_month_id = 1 or expected month number;
+        //$selected_month_id = 1;
+        $date = Carbon::now();
+        $selected_month_id = $date->format('F');
          
+        if($request->user_selected_month_id == !NULL){
+            $selected_month_id= $request->user_selected_month_id;
+        }
+        else{
+            $date = Carbon::now();
+            $selected_month_id = $date->format('F');
+
+            if($selected_month_id == "January"){
+                $selected_month_id = 1;
+            }
+            elseif($selected_month_id == "February"){
+                $selected_month_id = 2;
+            }
+            elseif($selected_month_id == "March"){
+                $selected_month_id = 3;
+            }
+            elseif($selected_month_id == "April"){
+                $selected_month_id = 4;
+            }
+            elseif($selected_month_id == "May"){
+                $selected_month_id = 5;
+            }
+            elseif($selected_month_id == "June"){
+                $selected_month_id = 6;
+            }
+            elseif($selected_month_id == "July"){
+                $selected_month_id = 7;
+            }
+            elseif($selected_month_id == "August"){
+                $selected_month_id = 8;
+            }
+            elseif($selected_month_id == "September"){
+                $selected_month_id = 9;
+            }
+            elseif($selected_month_id == "October"){
+                $selected_month_id = 10;
+            }
+            elseif($selected_month_id == "November"){
+                $selected_month_id = 11;
+            }
+            else{
+                $selected_month_id = 12;       
+            }
+        }
+
+
+
         // -----------------------------Start Income Calculation------------------------------------
          $monthly_incomes = FixedIncomeMonthly::where([["user_id", "=", $user_id]])
          ->orderBy('date')

@@ -25,5 +25,5 @@ Route::group(['middleware' => 'auth','namespace'=>'Admin'], function() {
     Route::resource('one-time-expense', OnetimeExpenseController::class);
     //Report
     Route::resource('income-expense-report', ReportController::class);
-    Route::get('pdf-report', [App\Http\Controllers\Admin\ReportController::class, 'generatePdf'])->name('generatePdf');
+    Route::get('pdf-report/{id}', [App\Http\Controllers\Admin\ReportController::class, 'generatePdf'])->name('generatePdf');
 });
