@@ -1,0 +1,12 @@
+
+*********//Email veriication
+//Email config
+
+MAIL_MAILER=smtp
+MAIL_HOST=mail.ourazad.co.uk
+MAIL_PORT=465
+MAIL_USERNAME="yousuf.azad@ourazad.co.uk"
+MAIL_PASSWORD="97531@Abcd"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="yousuf.azad@ourazad.co.uk"
+MAIL_FROM_NAME="${APP_NAME}"
