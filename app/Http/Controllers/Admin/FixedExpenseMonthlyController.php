@@ -8,11 +8,7 @@ use Carbon\Carbon;
 
 class FixedExpenseMonthlyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $monthly_fixed_expenses = FixedExpenseMonthly::all();

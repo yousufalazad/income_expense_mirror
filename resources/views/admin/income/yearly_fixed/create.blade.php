@@ -24,34 +24,31 @@
                     </div>
                 </div>
                 <div class="card-body">
-                <form action="{{ route('yearly-fixed-income.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    
-                    <div class="form-group">
-                        <label for="name">{{ __('Title') }}</label>
-                        <input type="text" class="form-control" id="title" name="title" required/>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="name">{{ __('Amount') }}</label>
-                        <input type="number" class="form-control" id="amount" name="amount" required/>
-                    </div>
+                    <form action="{{ route('yearly-fixed-income.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-                    <div class="form-group">
-                        <label for="name">{{ __('Starting Month') }}</label>
-                        <select class="form-control " id="starting_month_id" name="starting_month_id" required>
-                            <option value="">Starting Month</option>
-                            @foreach ($starting_months as $starting_month)
+                        <div class="form-group">
+                            <label for="name">{{ __('Title') }}</label>
+                            <input type="text" class="form-control" id="title" name="title" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">{{ __('Amount') }}</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">{{ __('Starting Month') }}</label>
+                            <select class="form-control " id="starting_month_id" name="starting_month_id" required>
+                                <option value="">Starting Month</option>
+                                @foreach ($starting_months as $starting_month)
                                 <option value="{{ $starting_month->id }}">{{ $starting_month->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-    
-                    
-
-                    <button type="submit" class="btn btn-primary btn-block px-4 my-3">{{ __('Save Yearly Income') }}</button>
-                </form>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit"
+                            class="btn btn-primary btn-block px-4 my-3">{{ __('Save Yearly Income') }}</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -9,11 +9,7 @@ use App\Models\Month;
 
 class FixedExpenseHalfYearlyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $half_yearly_fixed_expenses = FixedExpenseHalfYearly::all();
