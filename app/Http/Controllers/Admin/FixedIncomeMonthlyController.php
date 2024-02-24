@@ -9,33 +9,17 @@ use Carbon\Carbon;
 
 class FixedIncomeMonthlyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $monthly_fixed_incomes = FixedIncomeMonthly::all();
         return view('admin.income.monthly_fixed.index', compact('monthly_fixed_incomes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.income.monthly_fixed.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -57,48 +41,46 @@ class FixedIncomeMonthlyController extends Controller
         ->with('success', 'Add Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\FixedIncomeMonthly  $fixedIncomeMonthly
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FixedIncomeMonthly $fixedIncomeMonthly)
+    public function show( $id)
     {
-        //
+        $fixedIncomeMonthly = FixedIncomeMonthly::find($id);
+        return view('admin.income.monthly_fixed.show', compact('fixedIncomeMonthly'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\FixedIncomeMonthly  $fixedIncomeMonthly
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(FixedIncomeMonthly $fixedIncomeMonthly)
+    public function edit($id)
     {
-        //
+        $fixedIncomeMonthly = FixedIncomeMonthly::find($id);
+        return view('admin.income.monthly_fixed.edit', compact('fixedIncomeMonthly'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FixedIncomeMonthly  $fixedIncomeMonthly
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, FixedIncomeMonthly $fixedIncomeMonthly)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'amount' => 'required',
+            ]);
+        
+        $fixedIncomeMonthly = FixedIncomeMonthly::find($id);
+
+        $fixedIncomeMonthly->title = $request->title;
+        $fixedIncomeMonthly->description = $request->description;
+        $fixedIncomeMonthly->amount = $request->amount;
+        // $monthly_fixed_income->date = $request->date;
+        $fixedIncomeMonthly->date = Carbon::now();
+        $fixedIncomeMonthly->user_id = auth()->user()->id;
+        //dd($monthly_fixed_income);
+        $fixedIncomeMonthly->update();
+      
+        return redirect()->route('monthly-fixed-income.index')
+        ->with('success', 'Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\FixedIncomeMonthly  $fixedIncomeMonthly
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(FixedIncomeMonthly $fixedIncomeMonthly)
+
+    public function destroy($id)
     {
-        //
+        $fixedIncomeMonthly = FixedIncomeMonthly::find($id);
+        $fixedIncomeMonthly->delete();
+        return redirect()->route('monthly-fixed-income.index')
+        ->with('success', 'Delete Successfull');
     }
 }

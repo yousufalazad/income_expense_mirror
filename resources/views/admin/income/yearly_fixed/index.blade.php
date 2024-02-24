@@ -37,6 +37,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Amount</th>
+                                    <th>Year starting from</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,6 +46,7 @@
                                 <tr data-entry-id="{{ $yearly_fixed_income->id }}">
                                     <td>{{ $yearly_fixed_income->title }}</td>
                                     <td>{{ $yearly_fixed_income->amount }}</td>
+                                    <td>{{ $yearly_fixed_income->starting_month_id }}</td>
                                     
                                     <td>
                                         <div class="btn-group btn-group-sm">

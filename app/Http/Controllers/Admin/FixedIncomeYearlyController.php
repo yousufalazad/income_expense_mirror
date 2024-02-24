@@ -76,9 +76,11 @@ class FixedIncomeYearlyController extends Controller
      * @param  \App\Models\FixedIncomeYearly  $fixedIncomeYearly
      * @return \Illuminate\Http\Response
      */
-    public function edit(FixedIncomeYearly $fixedIncomeYearly)
+    public function edit($id)
     {
-        //
+        $yearly_fixed_income = FixedIncomeYearly::find($id);
+        $starting_months = Month::all();
+        return view('admin.income.yearly_fixed.edit', compact('yearly_fixed_income', 'starting_months'));
     }
 
     /**
@@ -88,9 +90,26 @@ class FixedIncomeYearlyController extends Controller
      * @param  \App\Models\FixedIncomeYearly  $fixedIncomeYearly
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FixedIncomeYearly $fixedIncomeYearly)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'amount' => 'required',
+            ]);
+        
+        $yearly_fixed_income = FixedIncomeYearly::find($id);
+        $yearly_fixed_income->starting_month_id = $request->starting_month_id;
+        $yearly_fixed_income->title = $request->title;
+        $yearly_fixed_income->description = $request->description;
+        $yearly_fixed_income->amount = $request->amount;
+        // $yearly_fixed_income->date = $request->date;
+        $yearly_fixed_income->date = Carbon::now();
+        $yearly_fixed_income->user_id = auth()->user()->id;
+        //dd($yearly_fixed_income);
+        $yearly_fixed_income->update();
+      
+        return redirect()->route('yearly-fixed-income.index')
+        ->with('success', 'Update Successfull');
     }
 
     /**
@@ -99,8 +118,10 @@ class FixedIncomeYearlyController extends Controller
      * @param  \App\Models\FixedIncomeYearly  $fixedIncomeYearly
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FixedIncomeYearly $fixedIncomeYearly)
+    public function destroy($id)
     {
-        //
+        $yearly_fixed_income = FixedIncomeYearly::find($id);
+        $yearly_fixed_income->delete();
+        return redirect()->route('yearly-fixed-income.index')->with('success', 'Delete successfull');
     }
 }

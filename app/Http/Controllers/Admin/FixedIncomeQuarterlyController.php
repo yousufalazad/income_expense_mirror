@@ -65,9 +65,10 @@ class FixedIncomeQuarterlyController extends Controller
      * @param  \App\Models\FixedIncomeQuarterly  $fixedIncomeQuarterly
      * @return \Illuminate\Http\Response
      */
-    public function show(FixedIncomeQuarterly $fixedIncomeQuarterly)
+    public function show($id)
     {
-        //
+        $quarterly_fixed_income = FixedIncomeQuarterly::find($id);
+        return view('admin.income.quarterly_fixed.show', compact('quarterly_fixed_income'));
     }
 
     /**
@@ -76,9 +77,11 @@ class FixedIncomeQuarterlyController extends Controller
      * @param  \App\Models\FixedIncomeQuarterly  $fixedIncomeQuarterly
      * @return \Illuminate\Http\Response
      */
-    public function edit(FixedIncomeQuarterly $fixedIncomeQuarterly)
+    public function edit($id)
     {
-        //
+        $fixedIncomeQuarterly = FixedIncomeQuarterly::find($id);
+        $starting_months = Month::all();
+        return view('admin.income.quarterly_fixed.edit', compact('fixedIncomeQuarterly', 'starting_months'));        
     }
 
     /**
@@ -88,9 +91,26 @@ class FixedIncomeQuarterlyController extends Controller
      * @param  \App\Models\FixedIncomeQuarterly  $fixedIncomeQuarterly
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FixedIncomeQuarterly $fixedIncomeQuarterly)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'amount' => 'required',
+            ]);
+        $quarterly_fixed_income = FixedIncomeQuarterly::find($id);
+        $starting_months = Month::find($id);
+        $starting_months->starting_month_id = $request->starting_month_id;
+        $quarterly_fixed_income->title = $request->title;
+        $quarterly_fixed_income->description = $request->description;
+        $quarterly_fixed_income->amount = $request->amount;
+        // $quarterly_fixed_income->date = $request->date;
+        $quarterly_fixed_income->date = Carbon::now();
+        $quarterly_fixed_income->user_id = auth()->user()->id;
+        //dd($quarterly_fixed_income);
+        $quarterly_fixed_income->save();
+      
+        return redirect()->route('quarterly-fixed-income.index')
+        ->with('success', 'Update Successfully');
     }
 
     /**
@@ -99,8 +119,11 @@ class FixedIncomeQuarterlyController extends Controller
      * @param  \App\Models\FixedIncomeQuarterly  $fixedIncomeQuarterly
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FixedIncomeQuarterly $fixedIncomeQuarterly)
+    public function destroy($id)
     {
-        //
+        $fixedIncomeQuarterly = FixedIncomeQuarterly::find($id);
+        $fixedIncomeQuarterly->delete();
+        return redirect()->route('quarterly-fixed-income.index')
+        ->with('success', 'Delete Successfull');
     }
 }

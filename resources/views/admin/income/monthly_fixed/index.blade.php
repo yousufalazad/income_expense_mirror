@@ -60,6 +60,10 @@
                                                 class="btn btn-info">Edit
                                                 <!-- <i class="fa fa-pencil-alt"></i> -->
                                             </a>
+                                            <a href="{{ route('monthly-fixed-income.show', $monthly_fixed_income->id) }}"
+                                                class="btn btn-primary">show
+                                                <!-- <i class="fa fa-pencil-alt"></i> -->
+                                            </a>
                                             <form onclick="return confirm('are you sure ? ')" class="d-inline"
                                                 action="{{ route('monthly-fixed-income.destroy', $monthly_fixed_income->id) }}"
                                                 method="POST">

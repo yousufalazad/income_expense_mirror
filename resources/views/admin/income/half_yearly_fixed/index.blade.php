@@ -24,10 +24,7 @@
                                 <span class="text">{{ __('Add Income') }}</span>
                             </a>
                         </div>
-
                     </div>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -37,6 +34,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Amount</th>
+                                    <th>Starting Month</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,6 +43,7 @@
                                 <tr data-entry-id="{{ $half_yearly_fixed_income->id }}">
                                     <td>{{ $half_yearly_fixed_income->title }}</td>
                                     <td>{{ $half_yearly_fixed_income->amount }}</td>
+                                    <td>{{ $half_yearly_fixed_income->starting_month_id }}</td>
                                     
                                     <td>
                                         <div class="btn-group btn-group-sm">

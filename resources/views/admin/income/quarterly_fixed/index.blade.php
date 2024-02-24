@@ -21,13 +21,10 @@
                                 <span class="icon text-white-50">
                                     <i class="fa fa-plus"></i>
                                 </span>
-                                <span class="text">{{ __('Add Income') }}</span>
+                                <span class="text">{{ __('Add Quarterly Income') }}</span>
                             </a>
                         </div>
-
                     </div>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -37,6 +34,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Amount</th>
+                                    <th>Starting Month (need to show month name)</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,21 +43,25 @@
                                 <tr data-entry-id="{{ $quarterly_fixed_income->id }}">
                                     <td>{{ $quarterly_fixed_income->title }}</td>
                                     <td>{{ $quarterly_fixed_income->amount }}</td>
+                                    <td>{{ $quarterly_fixed_income->starting_month_id }}</td>
                                     
                                     <td>
                                         <div class="btn-group btn-group-sm">
                                             <a href="{{ route('quarterly-fixed-income.edit', $quarterly_fixed_income->id) }}"
-                                                class="btn btn-info">Edit
-                                                <!-- <i class="fa fa-pencil-alt"></i> -->
+                                                class="btn btn-primary">Edit
+                                               {{-- <i class="fa fa-pencil-alt"></i> --}}
                                             </a>
-                                            <form onclick="return confirm('are you sure ? ')" class="d-inline"
+                                            {{-- <a href="{{ route('quarterly-fixed-income.show', $quarterly_fixed_income->id) }}"
+                                                class="btn btn-primary">View
+                                            </a> --}}
+                                            <form onclick="return confirm('Are you sure? ')" class="d-inline"
                                                 action="{{ route('quarterly-fixed-income.destroy', $quarterly_fixed_income->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-danger"
                                                     style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Delete
-                                                    <!-- <i class="fa fa-trash"></i> -->
+                                                   {{-- <i class="fa fa-trash"></i> --}}
                                                 </button>
                                             </form>
                                         </div>

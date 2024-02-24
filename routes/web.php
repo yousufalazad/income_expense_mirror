@@ -5,6 +5,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\EmailNotificationController;
+use App\Http\Controllers\Admin\FixedIncomeMonthlyController;
+use App\Http\Controllers\Admin\FixedIncomeQuarterlyController;
+use App\Http\Controllers\Admin\FixedIncomeHalfYearlyController;
+use App\Http\Controllers\Admin\FixedIncomeYearlyController;
+use App\Http\Controllers\Admin\OnetimeIncomeController;
+use App\Http\Controllers\Admin\FixedExpenseMonthlyController;
+use App\Http\Controllers\Admin\FixedExpenseQuarterlyController;
+use App\Http\Controllers\Admin\FixedExpenseHalfYearlyController;
+use App\Http\Controllers\Admin\FixedExpenseYearlyController;
+use App\Http\Controllers\Admin\OnetimeExpenseController;
+use App\Http\Controllers\Admin\ReportController;
 
 
 // use Illuminate\Foundation\Auth\EmailVerificationRequest;
